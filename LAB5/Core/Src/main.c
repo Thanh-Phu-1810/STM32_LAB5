@@ -118,7 +118,7 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-
+  uint32_t previous_time = HAL_GetTick();
   while (1)
   {
     /* USER CODE END WHILE */
@@ -129,8 +129,11 @@ int main(void)
 		  buffer_flag = 0;
 	  }
 	  uart_communiation_fsm();
-	  HAL_GPIO_TogglePin(GPIOA, LED_YELLOW_Pin);
-	  HAL_Delay(500);
+	  if(HAL_GetTick() - previous_time >= 500)
+	  {
+		  HAL_GPIO_TogglePin(GPIOA, LED_YELLOW_Pin);
+		  previous_time = HAL_GetTick();
+	  }
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

@@ -18,7 +18,7 @@ extern uint8_t buffer[MAX_BUFFER_SIZE];
 extern uint8_t index_buffer;
 extern uint8_t buffer_flag;
 extern uint32_t ADC_value;
-
+extern uint32_t command_flag;
 void command_parser_fsm();
 
 #endif /* INC_COMMAND_PARSER_FSM_H_ */
