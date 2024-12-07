@@ -65,11 +65,11 @@ uint8_t index_buffer = 0;
 uint8_t buffer_flag = 0;
 uint32_t ADC_value;
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
-	 if(huart->Instance == USART2){
-		 //HAL_UART_Transmit(&huart2, &temp, 1, 50); //Gui lai gia tri vua nhan
-		 buffer[index_buffer++] = temp;
+	 if(huart->Instance == USART2){ //kiem tra xem co sinh ra boi UART2
+		 //HAL_UART_Transmit(&huart2, &temp, 1, 500); //Gui lai gia tri vua nhan
+		 buffer[index_buffer++] = temp;  //chua gia tri vua nhan
 		 if(index_buffer == 30) index_buffer = 0;
-		 buffer_flag = 1;
+		 buffer_flag = 1; //bao hieu rang buffer da co du lieu moi can xu ly
 		 HAL_UART_Receive_IT(&huart2, &temp, 1);   //Kich hoat lai ngat de nhan gia tri tiep theo
 	 }
 }

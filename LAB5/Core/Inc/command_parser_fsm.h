@@ -13,8 +13,13 @@
 #include "string.h"
 
 #define MAX_BUFFER_SIZE 30
+#define INIT            0
+#define CHECK           1
+
 extern UART_HandleTypeDef huart2;
 extern uint8_t buffer[MAX_BUFFER_SIZE];
+extern uint8_t temp;
+extern int status;
 extern uint8_t index_buffer;
 extern uint8_t buffer_flag;
 extern uint32_t ADC_value;
