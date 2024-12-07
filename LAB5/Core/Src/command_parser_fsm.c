@@ -34,16 +34,17 @@ void command_parser_fsm()
 			{
 				status = CHECK;
 			}
+			else index_buffer = 0;
 			break;
 		case CHECK:
-				if(strstr((char *)buffer, "!RST#") != NULL)
+				if(strncmp((char *)buffer, "!RST#", 5) == 0)
 				{
 					memset(buffer, 0, MAX_BUFFER_SIZE);
 					command_flag = 1;
 					index_buffer = 0;
 					status = INIT;
 				}
-				else if(strstr((char *)buffer, "!OK#") != NULL)
+				else if(strncmp((char *)buffer, "!OK#", 4) == 0)
 				{
 					memset(buffer, 0, MAX_BUFFER_SIZE);
 					command_flag = 2;
@@ -53,6 +54,7 @@ void command_parser_fsm()
 			break;
 		default:
 			status = INIT;
+			index_buffer = 0;
 			break;
-	}
+}
 }
