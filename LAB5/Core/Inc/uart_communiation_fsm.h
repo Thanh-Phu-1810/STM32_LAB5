@@ -18,5 +18,14 @@ extern UART_HandleTypeDef huart2;
 extern uint32_t ADC_value;
 extern uint8_t waiting;
 void uart_communiation_fsm();
-
+void read_adc_value();
 #endif /* INC_UART_COMMUNIATION_FSM_H_ */
+
+
+
+
+
+
+
+
+

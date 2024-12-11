@@ -12,16 +12,16 @@ void command_parser_fsm()
 {
 //	if(strstr((char *)buffer, "!RST#") != NULL)
 //	{
-//		char str[50];
-//		sprintf(str, "!ADC=%lu#\r\n", ADC_value);
-//	    HAL_UART_Transmit(&huart2, (uint8_t *)str, strlen(str), 1000);//Truyền chuổi str qua UART2 để phản hồi lại cho các thiết bị gửi yêu cầu
+////		char str[50];
+////		sprintf(str, "!ADC=%lu#\r\n", ADC_value);
+////	    HAL_UART_Transmit(&huart2, (uint8_t *)str, strlen(str), 1000);//Truyền chuổi str qua UART2 để phản hồi lại cho các thiết bị gửi yêu cầu
 //		memset(buffer, 0 , MAX_BUFFER_SIZE); //xóa nội dung của buffer
 //		index_buffer = 0;
 //		command_flag = 1;
 //	}
 //	else if(strstr((char *)buffer, "!OK#") != NULL)
 //	{
-//		HAL_UART_Transmit(&huart2, (uint8_t *)"!OK#", 4, 1000);
+//		HAL_UART_Transmit(&huart2, (uint8_t *)"\r\n!OK#", 6, 1000);
 //		memset(buffer, 0, MAX_BUFFER_SIZE);
 //		index_buffer = 0;
 //		command_flag = 2;
@@ -34,27 +34,40 @@ void command_parser_fsm()
 			{
 				status = CHECK;
 			}
-			else index_buffer = 0;
+			else
+			{
+				index_buffer = 0;
+			}
 			break;
 		case CHECK:
-				if(strncmp((char *)buffer, "!RST#", 5) == 0)
+			    if(strcmp((char *)buffer, "!RST#") == 0)
 				{
 					memset(buffer, 0, MAX_BUFFER_SIZE);
 					command_flag = 1;
 					index_buffer = 0;
 					status = INIT;
 				}
-				else if(strncmp((char *)buffer, "!OK#", 4) == 0)
+				else if(strcmp((char *)buffer, "!OK#") == 0)
 				{
 					memset(buffer, 0, MAX_BUFFER_SIZE);
 					command_flag = 2;
 					index_buffer = 0;
-					status = INIT;
+					status = END;
 				}
+			break;
+		case END:
+			memset(buffer, 0, MAX_BUFFER_SIZE);
+			index_buffer = 0;
 			break;
 		default:
 			status = INIT;
 			index_buffer = 0;
 			break;
 }
+
 }
+
+
+
+
+

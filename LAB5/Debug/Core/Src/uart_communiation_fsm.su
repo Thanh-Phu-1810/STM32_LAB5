@@ -1,1 +1,2 @@
-uart_communiation_fsm.c:12:6:uart_communiation_fsm	64	static
+uart_communiation_fsm.c:13:6:uart_communiation_fsm	64	static
+uart_communiation_fsm.c:46:6:read_adc_value	8	static

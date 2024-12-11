@@ -73,13 +73,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 		 HAL_UART_Receive_IT(&huart2, &temp, 1);   //Kich hoat lai ngat de nhan gia tri tiep theo
 	 }
 }
-void read_adc_value() {
-    HAL_ADC_Start(&hadc1);
-    if (HAL_ADC_PollForConversion(&hadc1, 10) == HAL_OK) {
-        ADC_value = HAL_ADC_GetValue(&hadc1);
-    }
-    HAL_ADC_Stop(&hadc1);
-}
+
 /* USER CODE END 0 */
 
 /**
@@ -122,7 +116,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  read_adc_value();
+//	  read_adc_value();
 	  if(buffer_flag == 1)
 	  {
 		  command_parser_fsm();
